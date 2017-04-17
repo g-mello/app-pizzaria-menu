@@ -4,13 +4,13 @@
       <h3 style="color: rgb(255, 255, 255);" id="tamanho-heading4">Selecione o tamanho</h3>
     </div>
     <form class="list" id="tamanho-form5">
-	<ion-radio>
+	<ion-radio ng-click="inserirTamanho('P')">
 	 Brotinho
 	</ion-radio>
-	<ion-radio>
+	<ion-radio ng-click="inserirTamanho('M')">
 	 Média
 	</ion-radio>
-	<ion-radio>
+	<ion-radio ng-click="inserirTamanho('G')">
       Grande
 	 </ion-radio>
     </form>

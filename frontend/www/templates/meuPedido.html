@@ -1,16 +1,30 @@
 <ion-view style="background-color: rgb(227, 26, 42);" id="page3" title="Meu Pedido">
-<ion-content class="has-header" padding="true">
+<ion-content class="has-header" padding="true" data-ng-init="consultaPedido()">
 
+    <h2> Minhas Pizzas </h2>
     <ion-list id="confirmarCompra-list4">
-      <ion-item style="" id="confirmarCompra-list-item19">4 Queijos</ion-item>
-      <ion-item style="" id="confirmarCompra-list-item23">Brotinho</ion-item>
-      <ion-item style="" id="confirmarCompra-list-item24">Borda Rechada - Catupiry</ion-item>
-      <ion-item style="" id="confirmarCompra-list-item25">Rua do Comercio, 111</ion-item>
-      <ion-item style="" id="confirmarCompra-list-item26">Centro</ion-item>
-      <ion-item style="" id="confirmarCompra-list-item27">Cartão de Crédito</ion-item>
-      <ion-item style="" id="confirmarCompra-list-item28">Total R$ 35,00</ion-item>
-    </ion-list>
+        <ion-item ng-repeat='p in Pedido' style="" id="menu-list-item1" class="item-thumbnail-left">
+           <ion-avatar item-left>
+                 <img src='{{p.img}}'>
+            </ion-avatar>
+                <h2>{{pizza.nome }}</h2>
+                <p style="white-space:normal;">{{p.descricao}}</p>
+                <p style="white-space:normal;">Preço: R$ {{p.preco }}</p>
+       </ion-item>
+     </ion-list>
+
+     </br>
+     </br>
+     <div data-ng-init="consultaTotalPagar()">
+        <h3 > Total: R$ {{ total }} </h3>
+     </div>
+     </br>
+     </br>
+
+
+
     <a class="button button-balanced  button-block" id="confirmarCompra-button15" ui-sref="pedidoFinalizado">Finalizar Pedido</a>
+    <a class="button button-balanced  button-block" id="confirmarCompra-button15" ui-sref="pedidoFinalizado">Editar Pedido</a>
     <a class="button button-balanced  button-block" id="confirmarCompra-button15" ui-sref="menu">Cancelar Pedido</a>
 
 </ion-content>

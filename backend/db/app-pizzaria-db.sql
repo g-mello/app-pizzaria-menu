@@ -24,6 +24,7 @@ create table tb_pizzas(
     id_imagem integer not null,
     nome varchar(60),
     descricao varchar(200),
+    preco numeric(5,2),
     fg_ativo integer,
 
     constraint pk_tb_pizzas_id_pizza primary key(id_pizza)
@@ -34,7 +35,7 @@ create table tb_pedidos(
     id_pedido integer not null,
     id_cliente integer not null,
     id_pizza integer not null,
-    tamanho integer,
+    tamanho varchar(20),
     pagamento varchar(40),
     fg_ativo integer,
 
@@ -48,16 +49,16 @@ values
 
 insert into tb_pizzas
 values
-(1,1, 'Presunto e Mussarela', 'Molho, presunto, mussarela, azeitona e orégano', 1),
-(2,2, 'Quatro Queijos', 'Molho, parmesão, provolone, catupiry, mussarela, azeitona, tomate, orégano', 1),
-(3,3, 'Moda da Casa', 'Molhom calabresa, atum, presunto, ervilha, catupiry, mussarela, azeitona, tomate, orégano', 1),
-(4,4, 'Portuguesa', 'Molho, presunto, ovo cozido, palmito, mussarela, azeitona, tomate, orégano', 1),
-(5,5, 'Margherita', 'Molho, catupiry, parmesão, manjericão, azeitona, tomate e oregáno', 1),
-(6,6, 'Napolitana', 'Molho, parmesão, catupiry, mussarela, azeitona, tomate e orégano', 1),
-(7,7, 'Toscana', 'Molho, calabresa ralada, mussarela, alho frito, azeitona, tomate e orégano', 1),
-(8,8, 'Peperone', 'Molho, mussarela, peperone, azeitona, tomate e orégano', 1),
-(9,9, 'Chocolate', 'Mouse de chocolate e chocolate preto', 1),
-(10,10, 'Banana', 'Mussarela, banana, canela, açucar', 1);
+(1,1, 'Presunto e Mussarela', 'Molho, presunto, mussarela, azeitona e orégano',30.0, 1),
+(2,2, 'Quatro Queijos', 'Molho, parmesão, provolone, catupiry, mussarela, azeitona, tomate, orégano',30.0, 1),
+(3,3, 'Moda da Casa', 'Molhom calabresa, atum, presunto, ervilha, catupiry, mussarela, azeitona, tomate, orégano',30.0, 1),
+(4,4, 'Portuguesa', 'Molho, presunto, ovo cozido, palmito, mussarela, azeitona, tomate, orégano',30.0, 1),
+(5,5, 'Margherita', 'Molho, catupiry, parmesão, manjericão, azeitona, tomate e oregáno',30.0, 1),
+(6,6, 'Napolitana', 'Molho, parmesão, catupiry, mussarela, azeitona, tomate e orégano',30.0, 1),
+(7,7, 'Toscana', 'Molho, calabresa ralada, mussarela, alho frito, azeitona, tomate e orégano',30.0, 1),
+(8,8, 'Peperone', 'Molho, mussarela, peperone, azeitona, tomate e orégano',30.0, 1),
+(9,9, 'Chocolate', 'Mouse de chocolate e chocolate preto',30.0, 1),
+(10,10, 'Banana', 'Mussarela, banana, canela, açucar',30.0, 1);
 
 
 

@@ -1,22 +1,20 @@
 <ion-view style="background-color: rgb(227, 26, 42);" id="page2" title="Pizzas">
-<ion-content class="has-header" scroll="false" padding="true">
+<ion-content class="has-header" scroll="false" padding="true"  data-ng-init="consultaPizzas()" >
 
     <div id="menu-container1">
       <h2 style="color: rgb(255, 255, 255);" id="menu-heading1">Selecione sua Pizza</h2>
-    </div>
-   <ion-list id="menu-list1">
-
-      <ion-item ng-repeat='pizza in pizzas' style="" id="menu-list-item1" class="item-thumbnail-left">
-      <img src='{{pizza.img}}'>
-      <h2>{{pizza.nome}}</h2>
-      <p style="white-space:normal;">{{pizza.descricao}}</p>
-        <ion-option-button class="button-balanced">Adicionar</ion-option-button>
-        <ion-option-button class="button-assertive">Remover</ion-option-button>
-      </ion-item>
-
-    </ion-list>
+     </div >
 
 
+    <ion-list id="menu-list1">
+        <ion-item ng-repeat='pizza in listaPizzas' style="" id="menu-list-item1" class="item-thumbnail-left">
+        <img src='{{pizza.img}}'>
+        <h2>{{pizza.nome }}</h2>
+        <p style="white-space:normal;">{{pizza.descricao}}</p>
+            <ion-option-button class="button-balanced" ng-click="inserirPizza(pizza.id_pizza)">Adicionar</ion-option-button>
+        </ion-item>
+
+     </ion-list>
 
 
 </ion-content>

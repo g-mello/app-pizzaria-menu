@@ -73,7 +73,7 @@ app.get('/getPizzas', function(req, res) {
           return res.status(500).json({ success: false, data: err});
         }
 
-         client.query('select * from tb_pizzas order by tb_pizzas.nome',  function(err,result){
+         client.query('select * from tb_pizzas order by tb_pizzas.id_pizza',  function(err,result){
 
             done();
 
@@ -94,7 +94,7 @@ app.get('/getPizzas', function(req, res) {
 app.post('/inserePizza', urlencodedParser, function (req, res) {
 	  
 
-     var data = { id_pedido: req.body.id_pedido, id_cliente: req.body.id_cliente, id_pizza: req.body.id_pizza, tamanho: "null",  pagamento: "null", fg_ativo: 1} ;
+     var data = { id_pedido: 1, id_cliente: 1, id_pizza: req.body.id_pizza, tamanho: "null",  pagamento: "null", fg_ativo: 1} ;
 
      console.log("id_pedido: " + data.id_pedido);
      console.log("id_cliente: " + data.id_cliente);
@@ -179,7 +179,7 @@ app.put('/cancelarPizza', urlencodedParser, function(req, res) {
 // Selectiona o tamanho das pizzas 
 app.put('/insereTamanho', urlencodedParser, function(req, res) {
 
-     var id_pedido = req.body.id_pedido;
+     var id_pedido = 1;
      var tamanho = req.body.tamanho;
 
      console.log("id_pedido: " + id_pedido);
@@ -201,8 +201,6 @@ app.put('/insereTamanho', urlencodedParser, function(req, res) {
                 return console.error('error running query', err);
             }
           });
-	 res.send("Tamanho escolhido com sucesso");
-
     });
 
 });
@@ -210,7 +208,7 @@ app.put('/insereTamanho', urlencodedParser, function(req, res) {
 // Selectiona a forma de pagamento
 app.put('/inserePagamento', urlencodedParser, function(req, res) {
 
-     var id_pedido = req.body.id_pedido;
+     var id_pedido = 1;
      var pagamento = req.body.pagamento;
 
      console.log("id_pedido: " + id_pedido);
@@ -236,6 +234,35 @@ app.put('/inserePagamento', urlencodedParser, function(req, res) {
     });
 
 });
+
+app.get('/getTotalPagar', function(req, res) {
+
+
+    pool.connect(function(err, client, done) {
+
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+         client.query('select count(id_pizza)*30.0 as total from tb_pedidos where id_pedido = 1',  function(err,result){
+
+            done();
+
+            if(err){
+                return console.error('error running query', err);
+            }
+
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.json(result.rows);
+
+        });
+
+    });
+
+});
+
 
 //-------------------------------------------------------------
 
