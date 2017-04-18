@@ -1,10 +1,10 @@
 app = angular.module('app.controllers', [])
   
-app.controller('pizzasCtrl', ['$scope', '$stateParams', '$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+app.controller('pizzasCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 //
-function ($scope, $stateParams, $http) {
+function ($scope, $stateParams, $http, $ionicPopup) {
     
     var atualiza_pizzas  = function(){
         $http.get('http://localhost:3000/getPizzas')
@@ -23,13 +23,50 @@ function ($scope, $stateParams, $http) {
 
         $http.post('http://localhost:3000/inserePizza', { "id_pizza": id_pizza }  ) 
             .then(function (response){
-                alert("Pizza add com sucesso");
                 }
             );
                                 
+        showAlert_ADD();
+    };
+
+    $scope.removerPizza = function(id_pizza){
+        var pizza = $scope.pizza;
+
+        $http.put('http://localhost:3000/cancelarPizza', { "id_pizza": id_pizza }  ) 
+            .then(function (response){
+                }
+            );
+                                
+        showAlert_DEL();
     };
 
 
+    var showAlert_ADD = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: "Obrigado!",
+            template: "Pizza adiciona ao pedido",
+            okText: "Fechar",
+            okType: "button-balanced"
+        });
+        
+        alertPopup.then(function(res) {
+        console.log('Alert pizza add ao pedido');
+        });
+   };
+ 
+    var showAlert_DEL = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: "Ok!",
+            template: "Pizza removida do pedido",
+            okText: "Fechar",
+            okType: "button-assertive"
+        });
+        
+        alertPopup.then(function(res) {
+        console.log('Alert pizza removida do pedido');
+        });
+   };
+ 
 
 }])
    
@@ -73,7 +110,6 @@ function ($scope, $stateParams, $http) {
 
         $http.put('http://localhost:3000/inserePagamento', { "pagamento": pagamento}  ) 
             .then(function (response){
-                alert("Pagamento add com sucesso");
                 }
             );
                                 
