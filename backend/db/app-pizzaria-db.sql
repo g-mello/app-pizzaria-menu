@@ -36,6 +36,7 @@ create table tb_pedidos(
     id_cliente integer not null,
     id_pizza integer not null,
     tamanho varchar(20),
+    borda varchar(10),
     pagamento varchar(40),
     fg_ativo integer,
 
@@ -49,16 +50,16 @@ values
 
 insert into tb_pizzas
 values
-(1,1, 'Presunto e Mussarela', 'Molho, presunto, mussarela, azeitona e orégano',30.0, 1),
-(2,2, 'Quatro Queijos', 'Molho, parmesão, provolone, catupiry, mussarela, azeitona, tomate, orégano',30.0, 1),
-(3,3, 'Moda da Casa', 'Molhom calabresa, atum, presunto, ervilha, catupiry, mussarela, azeitona, tomate, orégano',30.0, 1),
-(4,4, 'Portuguesa', 'Molho, presunto, ovo cozido, palmito, mussarela, azeitona, tomate, orégano',30.0, 1),
-(5,5, 'Margherita', 'Molho, catupiry, parmesão, manjericão, azeitona, tomate e oregáno',30.0, 1),
-(6,6, 'Napolitana', 'Molho, parmesão, catupiry, mussarela, azeitona, tomate e orégano',30.0, 1),
-(7,7, 'Toscana', 'Molho, calabresa ralada, mussarela, alho frito, azeitona, tomate e orégano',30.0, 1),
-(8,8, 'Peperone', 'Molho, mussarela, peperone, azeitona, tomate e orégano',30.0, 1),
-(9,9, 'Chocolate', 'Mouse de chocolate e chocolate preto',30.0, 1),
-(10,10, 'Banana', 'Mussarela, banana, canela, açucar',30.0, 1);
+(1,1, 'Presunto e Mussarela', 'Molho, presunto, mussarela, azeitona e orégano',27.00, 1),
+(2,2, 'Quatro Queijos', 'Molho, parmesão, provolone, catupiry, mussarela, azeitona, tomate, orégano',33.00, 1),
+(3,3, 'Moda da Casa', 'Molhom calabresa, atum, presunto, ervilha, catupiry, mussarela, azeitona, tomate, orégano',30.00, 1),
+(4,4, 'Portuguesa', 'Molho, presunto, ovo cozido, palmito, mussarela, azeitona, tomate, orégano',28.00, 1),
+(5,5, 'Margherita', 'Molho, catupiry, parmesão, manjericão, azeitona, tomate e oregáno',31.00, 1),
+(6,6, 'Napolitana', 'Molho, parmesão, catupiry, mussarela, azeitona, tomate e orégano',29.00, 1),
+(7,7, 'Toscana', 'Molho, calabresa ralada, mussarela, alho frito, azeitona, tomate e orégano',25.00, 1),
+(8,8, 'Peperone', 'Molho, mussarela, peperone, azeitona, tomate e orégano',28.00, 1),
+(9,9, 'Chocolate', 'Mouse de chocolate e chocolate preto',31.00, 1),
+(10,10, 'Banana', 'Mussarela, banana, canela, açucar',31.00, 1);
 
 
 

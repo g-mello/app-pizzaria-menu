@@ -60,6 +60,30 @@ app.get('/getPedidos', function(req, res) {
 });
 
 
+app.put('/cancelarPedido', urlencodedParser, function(req, res) {
+
+     var id_pedido = req.body.id_pedido;
+    
+    pool.connect(function(err, client, done) {
+
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+         client.query("update tb_pedidos set fg_ativo = 0 where id_pedido = $1", [id_pedido], function(err,result){
+            done();
+
+            if(err){
+                return console.error('error running query', err);
+            }
+          });
+	 res.send("Pedido cancelado com sucesso");
+
+    });
+
+});
 
 // Seleciona todas as pizzas -- funcionando 
 app.get('/getPizzas', function(req, res) {
@@ -94,12 +118,13 @@ app.get('/getPizzas', function(req, res) {
 app.post('/inserePizza', urlencodedParser, function (req, res) {
 	  
 
-     var data = { id_pedido: 1, id_cliente: 1, id_pizza: req.body.id_pizza, tamanho: "null",  pagamento: "null", fg_ativo: 1} ;
+     var data = { id_pedido: 1, id_cliente: 1, id_pizza: req.body.id_pizza, tamanho: " ", borda: "Não",  pagamento: " ", fg_ativo: 1} ;
 
      console.log("id_pedido: " + data.id_pedido);
      console.log("id_cliente: " + data.id_cliente);
      console.log("id_pizza: " + data.id_pizza);
      console.log("tamanho: " + data.tamanho);
+     console.log("borda: " + data.borda);
      console.log("pagameno: " + data.pagamento);
      console.log("fg_ativo: " + data.fg_ativo);
 
@@ -109,8 +134,8 @@ app.post('/inserePizza', urlencodedParser, function (req, res) {
 	    return console.error('error fetching client from pool', err);
 	  }
 
-	  client.query( "INSERT INTO tb_pedidos values($1,$2,$3,$4, $5, $6)",
-			[ data.id_pedido, data.id_cliente, data.id_pizza, data.tamanho, data.pagamento, data.fg_ativo])
+	  client.query( "INSERT INTO tb_pedidos values($1,$2,$3,$4, $5, $6, $7)",
+			[ data.id_pedido, data.id_cliente, data.id_pizza, data.tamanho, data.borda, data.pagamento, data.fg_ativo])
 
 	  done();
 
@@ -123,7 +148,7 @@ app.post('/inserePizza', urlencodedParser, function (req, res) {
 	res.send('Pizza adicionada com sucesso');
 });
 
-// Remove uma pizza do Pedido -- não funcionando
+// Remove uma pizza do Pedido 
 app.delete('/removePizza/:id_pizza', function(req, res) {
 
     var id = req.params.id_pizza;
@@ -205,6 +230,36 @@ app.put('/insereTamanho', urlencodedParser, function(req, res) {
 
 });
 
+app.put('/insereBorda', urlencodedParser, function(req, res) {
+
+     var id_pedido = 1;
+     var borda = req.body.borda;
+
+     console.log("id_pedido: " + id_pedido);
+     console.log("borda: " + borda);
+
+    
+    pool.connect(function(err, client, done) {
+
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+         client.query("update tb_pedidos set borda = $1 where id_pedido = $2", [borda, id_pedido], function(err,result){
+            done();
+
+            if(err){
+                return console.error('error running query', err);
+            }
+          });
+    });
+
+});
+
+
+
 // Selectiona a forma de pagamento
 app.put('/inserePagamento', urlencodedParser, function(req, res) {
 
@@ -235,6 +290,7 @@ app.put('/inserePagamento', urlencodedParser, function(req, res) {
 
 });
 
+
 app.get('/getTotalPagar', function(req, res) {
 
 
@@ -246,7 +302,7 @@ app.get('/getTotalPagar', function(req, res) {
           return res.status(500).json({ success: false, data: err});
         }
 
-         client.query('select count(id_pizza)*30.0 as total from tb_pedidos where id_pedido = 1',  function(err,result){
+         client.query('select sum(pz.preco) as total from tb_pizzas pz inner join tb_pedidos p on ( pz.id_pizza = p.id_pizza)  where p.id_pedido = 1 and p.fg_ativo = 1',  function(err,result){
 
             done();
 
@@ -255,7 +311,7 @@ app.get('/getTotalPagar', function(req, res) {
             }
 
             res.setHeader('Access-Control-Allow-Origin', '*');
-            res.json(result.rows);
+            res.json(result.rows[0]);
 
         });
 

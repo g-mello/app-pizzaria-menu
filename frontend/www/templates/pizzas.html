@@ -8,9 +8,10 @@
 
     <ion-list id="menu-list1">
         <ion-item ng-repeat='pizza in listaPizzas' style="" id="menu-list-item1" class="item-thumbnail-left">
-        <img src='{{pizza.img}}'>
+        <img src='img/{{pizza.id_imagem}}.jpg'>
         <h2>{{pizza.nome }}</h2>
         <p style="white-space:normal;">{{pizza.descricao}}</p>
+        <p style="white-space:normal;">Preco: R$ {{pizza.preco}}</p>
             <ion-option-button class="button-balanced" ng-click="inserirPizza(pizza.id_pizza)">Adicionar</ion-option-button>
         </ion-item>
 

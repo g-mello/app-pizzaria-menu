@@ -48,6 +48,16 @@ function ($scope, $stateParams, $http) {
                                 
     };
 
+    $scope.inserirBorda = function(borda){
+
+        $http.put('http://localhost:3000/insereBorda', { "borda": borda}  ) 
+            .then(function (response){
+                alert("Borda add com sucesso");
+                }
+            );
+                                
+    };
+
 
 
 
@@ -73,15 +83,16 @@ function ($scope, $stateParams, $http) {
 
 }])
 
-app.controller('meuPedidoCtrl', ['$scope', '$stateParams', '$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+app.controller('meuPedidoCtrl', ['$scope', '$stateParams', '$http','$ionicModal', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http) {
+function ($scope, $stateParams, $http, $ionicModal) {
  
     var atualiza_pedido = function(){
         $http.get('http://localhost:3000/getPedidos')
         .then(function (response){
             $scope.Pedido = response.data;			
+
             }
         );
     };
@@ -100,6 +111,30 @@ function ($scope, $stateParams, $http) {
 
      $scope.consultaTotalPagar= function(){
 			atualiza_total_pagar();
+    };
+
+     $scope.cancelarPedido = function(){
+        $http.put('http://localhost:3000/cancelarPedido', {'id_pedido':1})
+        .then(function (response){
+            $scope.total = response.data;			
+            }
+        );
+     };
+
+    $ionicModal.fromTemplateUrl('editarPedido.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+        }).then(function(modal) {
+        $scope.modal = modal;
+    });
+ 
+ 
+    $scope.modal_editarPedido = function() {
+        $scope.modal.show();
+    };
+    
+    $scope.closeModal = function() {
+    $scope.modal.hide();
     };
 
 
