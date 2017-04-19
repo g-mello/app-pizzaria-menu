@@ -1,31 +1,44 @@
 <ion-view style="background-color: rgb(227, 26, 42);" id="page3" title="Meu Pedido">
 <ion-content class="has-header" padding="true" data-ng-init="consultaPedido()">
 
-     <ion-list id=confirmarCompra-lista4">
+     <ion-list id=confirmarCompra-lista4" data-ng-init="consultaPedido()">
+
        <ion-list-header>
-      <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">Pizzas</h2>
+      <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">Minhas Pizzas</h2>
        </ion-list-header>
+
          <ion-item ng-repeat='p in Pedido' style="" id="menu-list-item1" class="item-thumbnail-left">
-                 <img src='img/{{p.id_imagem}}.jpg'>
+                <img src='img/{{p.id_imagem}}.jpg'>
                 <h2>{{p.nome }}</h2>
                 <p style="white-space:normal;">{{p.descricao}}</p>
                 <p style="white-space:normal;">Preço: R$ {{p.preco }}</p>
+                <ion-option-button class="button-assertive" ng-click="removerPizza(p.id_pizza)">Remover</ion-option-button>
        </ion-item>
+
      </ion-list>
 
      </br>
      </br>
         <ion-list>
              <ion-list-header>
-            <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">Tamanho</h2>
+             <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">
+                 Tamanho
+                <a class="button button-balanced"ng-click="modal_editarTamanho()" >Editar</a>
+             </h2>
             </ion-list-header>
-            <ion-item> Tamanho: {{Pedido[0].tamanho}} </ion-item>
+            <ion-item> 
+                Tamanho: {{Pedido[0].tamanho}}
+            </ion-item>
          </ion-list>
+
 
      </br>
         <ion-list>
              <ion-list-header>
-            <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">Borda</h2>
+             <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">
+                 Borda Recheada
+                <a class="button button-balanced" ng-click="modal_editarBorda()" >Editar</a>
+             </h3>
             </ion-list-header>
             <ion-item> Borda Recheada: {{Pedido[0].borda}}</ion-item>
          </ion-list>
@@ -33,7 +46,10 @@
      </br>
         <ion-list>
              <ion-list-header>
-            <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">Pagamento</h2>
+             <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">
+                 Pagamento
+                <a class="button button-balanced" ng-click="modal_editarPagamento()">Editar</a>
+             </h3>
             </ion-list-header>
             <ion-item> Forma de Pagamento: {{Pedido[0].pagamento }} </ion-item>
          </ion-list>
@@ -53,29 +69,95 @@
 
 
     <a class="button button-balanced  button-block" id="confirmarCompra-button15" >Finalizar Pedido</a>
-    <a class="button button-balanced  button-block" id="editarCompra-button15"ng-click="modal_editarPedido()" >Editar Pedido</a>
     <a class="button button-balanced  button-block" id="cancelarCompra-button15" ng-click="cancelarPedido()" >Cancelar Pedido</a>
 
 </ion-content>
 </ion-view>
 
 
-<script id="editarPedido.html" type="text/ng-template">
+<script id="editarTamanho.html" type="text/ng-template">
  <ion-modal-view>
 
    <ion-header-bar>
     <div class="buttons">
-      <h1 class="title">My Modal title</h1>
+      <h1 class="title">Editar Tamanho</h1>
     </div>
    </ion-header-bar>
 
    <ion-content>
-     Hello!
+
+    <form class="list" id="tamanho-form5">
+
+        <ion-radio ng-click="atualizarTamanho('P')">
+            Brotinho
+        </ion-radio>
+
+        <ion-radio ng-click="atualizarTamanho('M')">
+            Média
+        </ion-radio>
+
+        <ion-radio ng-click="atualizarTamanho('G')">
+            Grande
+        </ion-radio>
+
+    </form>
+
+    <a class="button button-balanced " ng-click="closeModal()" > Salvar </a>
    </ion-content>
 
  </ion-modal-view>
  
 </script>
+
+<script id="editarBorda.html" type="text/ng-template">
+ <ion-modal-view>
+
+   <ion-header-bar>
+    <div class="buttons">
+      <h1 class="title">Editar Borda Recheada</h1>
+    </div>
+   </ion-header-bar>
+
+   <ion-content>
+        <form class="list" id="tamanho-form9">
+            <ion-radio ng-click="atualizarBorda('Sim')"> Sim </ion-radio>
+            <ion-radio ng-click="atualizarBorda('Não')"> Não </ion-radio>
+        </ion-radio>
+    </form>
+
+    <a class="button button-balanced " ng-click="closeModal()" > Salvar </a>
+
+   </ion-content>
+
+ </ion-modal-view>
+ 
+</script>
+
+<script id="editarPagamento.html" type="text/ng-template">
+ <ion-modal-view>
+
+   <ion-header-bar>
+    <div class="buttons">
+      <h1 class="title">Editar Forma de Pagamento</h1>
+    </div>
+   </ion-header-bar>
+
+   <ion-content>
+	<ion-radio ng-click="atualizarPagamento('Dinheiro')">
+	 Dinheiro
+	</ion-radio>
+	<ion-radio ng-click="atualizarPagamento('Cartão')">
+	 Cartão
+	</ion-radio>
+
+   </ion-content>
+
+    <a class="button button-balanced " ng-click="closeModal()" > Salvar </a>
+
+ </ion-modal-view>
+ 
+</script>
+
 
 
 

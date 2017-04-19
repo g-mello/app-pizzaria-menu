@@ -119,10 +119,10 @@ function ($scope, $stateParams, $http) {
 
 }])
 
-app.controller('meuPedidoCtrl', ['$scope', '$stateParams', '$http','$ionicModal', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+app.controller('meuPedidoCtrl', ['$scope', '$stateParams', '$http','$ionicModal', '$ionicPopup', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http, $ionicModal) {
+function ($scope, $stateParams, $http, $ionicModal, $ionicPopup ) {
  
     var atualiza_pedido = function(){
         $http.get('http://localhost:3000/getPedidos')
@@ -157,22 +157,111 @@ function ($scope, $stateParams, $http, $ionicModal) {
         );
      };
 
-    $ionicModal.fromTemplateUrl('editarPedido.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-        }).then(function(modal) {
-        $scope.modal = modal;
-    });
- 
- 
-    $scope.modal_editarPedido = function() {
-        $scope.modal.show();
-    };
-    
-    $scope.closeModal = function() {
-    $scope.modal.hide();
+    $scope.removerPizza = function(id_pizza){
+        var pizza = $scope.pizza;
+
+        $http.put('http://localhost:3000/cancelarPizza', { "id_pizza": id_pizza }  ) 
+            .then(function (response){
+                }
+            );
+                                
+        showAlert_DEL();
     };
 
+
+    $scope.inserirTamanho = function(tamanho){
+
+        $http.put('http://localhost:3000/insereTamanho', { "tamanho": tamanho }  ) 
+            .then(function (response){
+                alert("Tamanho add com sucesso");
+                }
+            );
+                                
+    };
+
+    $scope.inserirBorda = function(borda){
+
+        $http.put('http://localhost:3000/insereBorda', { "borda": borda}  ) 
+            .then(function (response){
+                alert("Borda add com sucesso");
+                }
+            );
+                                
+    };
+
+
+     $scope.atualizarPagamento = function(pagamento){
+
+        $http.put('http://localhost:3000/inserePagamento', { "pagamento": pagamento}  ) 
+            .then(function (response){
+                }
+            );
+                                
+    };
+
+/*
+ * Alerts
+ */
+    var showAlert_DEL = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: "Ok!",
+            template: "Pizza removida do pedido",
+            okText: "Fechar",
+            okType: "button-assertive"
+        });
+        
+        alertPopup.then(function(res) {
+        console.log('Alert pizza removida do pedido');
+        });
+   };
+ 
+
+/*
+ * MODALS
+ */
+
+    $scope.modal_editarTamanho = function() {
+
+        $ionicModal.fromTemplateUrl('editarTamanho.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+            }).then(function(modal) {
+            $scope.modal = modal;
+        });
+
+        $scope.modal.show();
+    };
+ 
+ 
+    $scope.modal_editarBorda= function() {
+
+        $ionicModal.fromTemplateUrl('editarBorda.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+            }).then(function(modal) {
+            $scope.modal = modal;
+        });
+
+        $scope.modal.show();
+    };
+
+ 
+    $scope.modal_editarPagamento = function() {
+
+        $ionicModal.fromTemplateUrl('editarPagamento.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+            }).then(function(modal) {
+         $scope.modal = modal;
+       });
+
+
+        $scope.modal.show();
+    };
+   
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+    };
 
 
 
