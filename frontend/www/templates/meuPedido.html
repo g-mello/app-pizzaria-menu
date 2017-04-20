@@ -23,7 +23,6 @@
              <ion-list-header>
              <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">
                  Tamanho
-                <a class="button button-balanced"ng-click="modal_editarTamanho()" >Editar</a>
              </h2>
             </ion-list-header>
             <ion-item> 
@@ -37,7 +36,6 @@
              <ion-list-header>
              <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">
                  Borda Recheada
-                <a class="button button-balanced" ng-click="modal_editarBorda()" >Editar</a>
              </h3>
             </ion-list-header>
             <ion-item> Borda Recheada: {{Pedido[0].borda}}</ion-item>
@@ -48,7 +46,6 @@
              <ion-list-header>
              <h3 style="color: rgb(255, 255, 255);" id="menu-heading1">
                  Pagamento
-                <a class="button button-balanced" ng-click="modal_editarPagamento()">Editar</a>
              </h3>
             </ion-list-header>
             <ion-item> Forma de Pagamento: {{Pedido[0].pagamento }} </ion-item>
@@ -69,94 +66,73 @@
 
 
     <a class="button button-balanced  button-block" id="confirmarCompra-button15" >Finalizar Pedido</a>
+    <a class="button button-balanced  button-block" id="confirmarCompra-button15"ng-click="openModal()" >Editar Pedido</a>
     <a class="button button-balanced  button-block" id="cancelarCompra-button15" ng-click="cancelarPedido()" >Cancelar Pedido</a>
 
 </ion-content>
 </ion-view>
 
 
-<script id="editarTamanho.html" type="text/ng-template">
- <ion-modal-view>
+
+<script id="my-modal.html" type="text/ng-template">
+ <ion-modal-view  >
 
    <ion-header-bar>
     <div class="buttons">
-      <h1 class="title">Editar Tamanho</h1>
+        <h1 class="title">Editar Pedido</h1>
     </div>
    </ion-header-bar>
 
    <ion-content>
 
+    <h3  id="tamanho-heading6"> Tamanho</h3>
     <form class="list" id="tamanho-form5">
 
-        <ion-radio ng-click="atualizarTamanho('P')">
+        <ion-radio ng-click="inserirTamanho('P')">
             Brotinho
         </ion-radio>
 
-        <ion-radio ng-click="atualizarTamanho('M')">
+        <ion-radio ng-click="inserirTamanho('M')">
             Média
         </ion-radio>
 
-        <ion-radio ng-click="atualizarTamanho('G')">
+        <ion-radio ng-click="inserirTamanho('G')">
             Grande
         </ion-radio>
 
     </form>
 
-    <a class="button button-balanced " ng-click="closeModal()" > Salvar </a>
-   </ion-content>
+    <h3 id="tamanho-heading6"> Borda Recheada</h3>
+    <form class="list" id="tamanho-form9">
 
- </ion-modal-view>
- 
-</script>
+	    <ion-radio ng-click="inserirBorda('Sim')">
+        Sim
+	    </ion-radio>
 
-<script id="editarBorda.html" type="text/ng-template">
- <ion-modal-view>
+	    <ion-radio ng-click="inserirBorda('Não')">
+        Não 
+	    </ion-radio>
 
-   <ion-header-bar>
-    <div class="buttons">
-      <h1 class="title">Editar Borda Recheada</h1>
-    </div>
-   </ion-header-bar>
-
-   <ion-content>
-        <form class="list" id="tamanho-form9">
-            <ion-radio ng-click="atualizarBorda('Sim')"> Sim </ion-radio>
-            <ion-radio ng-click="atualizarBorda('Não')"> Não </ion-radio>
-        </ion-radio>
     </form>
 
-    <a class="button button-balanced " ng-click="closeModal()" > Salvar </a>
+    <h3  id="menu-heading1">Selecione a forma de pagamento: </h2>
+    <form class="list" id="tamanho-form9">
+
+        <ion-radio ng-click="inserirPagamento('Dinheiro')">
+            Dinheiro
+        </ion-radio>
+
+        <ion-radio ng-click="inserirPagamento('Cartão')">
+            Cartão
+        </ion-radio>
+
+    </form>
 
    </ion-content>
-
  </ion-modal-view>
  
 </script>
 
-<script id="editarPagamento.html" type="text/ng-template">
- <ion-modal-view>
-
-   <ion-header-bar>
-    <div class="buttons">
-      <h1 class="title">Editar Forma de Pagamento</h1>
-    </div>
-   </ion-header-bar>
-
-   <ion-content>
-	<ion-radio ng-click="atualizarPagamento('Dinheiro')">
-	 Dinheiro
-	</ion-radio>
-	<ion-radio ng-click="atualizarPagamento('Cartão')">
-	 Cartão
-	</ion-radio>
-
-   </ion-content>
-
-    <a class="button button-balanced " ng-click="closeModal()" > Salvar </a>
-
- </ion-modal-view>
- 
-</script>
 
 
 

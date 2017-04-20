@@ -219,51 +219,22 @@ function ($scope, $stateParams, $http, $ionicModal, $ionicPopup ) {
 /*
  * MODALS
  */
-
-    $scope.modal_editarTamanho = function() {
-
-        $ionicModal.fromTemplateUrl('editarTamanho.html', {
+ 
+        $ionicModal.fromTemplateUrl('my-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
             }).then(function(modal) {
             $scope.modal = modal;
         });
-
-        $scope.modal.show();
-    };
- 
- 
-    $scope.modal_editarBorda= function() {
-
-        $ionicModal.fromTemplateUrl('editarBorda.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-            }).then(function(modal) {
-            $scope.modal = modal;
-        });
-
-        $scope.modal.show();
-    };
-
- 
-    $scope.modal_editarPagamento = function() {
-
-        $ionicModal.fromTemplateUrl('editarPagamento.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-            }).then(function(modal) {
-         $scope.modal = modal;
-       });
-
-
-        $scope.modal.show();
-    };
-   
-    $scope.closeModal = function() {
-        $scope.modal.hide();
-    };
-
-
+        
+        
+        $scope.openModal = function() {
+            $scope.modal.show();
+        };
+        
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
 
 }])
 
