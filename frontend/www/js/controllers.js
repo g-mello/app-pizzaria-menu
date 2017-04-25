@@ -190,6 +190,7 @@ function ($scope, $stateParams, $http, $ionicModal, $ionicPopup ) {
     };
 
 
+
      $scope.atualizarPagamento = function(pagamento){
 
         $http.put('http://localhost:3000/inserePagamento', { "pagamento": pagamento}  ) 
