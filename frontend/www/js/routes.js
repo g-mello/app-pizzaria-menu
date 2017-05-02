@@ -73,9 +73,14 @@ angular.module('app.routes', [])
     templateUrl: 'templates/cadastrar.html',
     controller: 'cadastrarCtrl'
   })
-
-$urlRouterProvider.otherwise('/login')
-
   
+  .state('finalizado', {
+    url: '/finalizado',
+    templateUrl: 'templates/finalizado.html',
+    controller: 'finalizadoCtrl'
+  })
+  
+$urlRouterProvider.otherwise('/login')
+ 
 
 });
