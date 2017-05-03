@@ -66,11 +66,19 @@
 
 
     <a class="button button-balanced  button-block" id="confirmarCompra-button15" >Finalizar Pedido</a>
-    <a class="button button-balanced  button-block" id="confirmarCompra-button15"ng-click="openModal()" >Editar Pedido</a>
+    <a class="button button-balanced  button-block" id="editarCompra-button15" ng-click="openModal()" >Editar Pedido</a>
     <a class="button button-balanced  button-block" id="cancelarCompra-button15" ng-click="cancelarPedido()" >Cancelar Pedido</a>
 
 </ion-content>
 </ion-view>
+
+     
+<ion-header-bar class="bar-positive">
+  <div class="buttons">
+    <h1 class="title">Ionic Modal</h1>
+    <button class="button button-icon ion-ios-close-empty" ng-click="closeModal()"></button>
+  </div>
+</ion-header-bar>
 
 
 
@@ -79,30 +87,41 @@
 
    <ion-header-bar>
     <div class="buttons">
-        <h1 class="title">Editar Pedido</h1>
+        <h1 class="title">Editar Meu Pedido</h1>
     </div>
+
+    <div class="buttons">
+
+     <button ion-button color="danger" outline icon-only ng-click="closeModal()">
+           <ion-icon name='remove-circle' is-active="false"></ion-icon>
+     </button>
+
+    </div>
+
    </ion-header-bar>
 
-   <ion-content>
+   <ion-content  style="background-color: rgb(227, 26, 42);" >
 
-    <h3  id="tamanho-heading6"> Tamanho</h3>
+    </br>
+    <h3  style="color: rgb(255, 255, 255);" id="tamanho-heading6"> Novo Tamanho</h3>
     <form class="list" id="tamanho-form5">
 
-        <ion-radio ng-click="inserirTamanho('P')">
+        <ion-radio ng-click="inserirTamanho('Brotinho')">
             Brotinho
         </ion-radio>
 
-        <ion-radio ng-click="inserirTamanho('M')">
+        <ion-radio ng-click="inserirTamanho('Media')">
             Média
         </ion-radio>
 
-        <ion-radio ng-click="inserirTamanho('G')">
+        <ion-radio ng-click="inserirTamanho('Grande')">
             Grande
         </ion-radio>
 
     </form>
 
-    <h3 id="tamanho-heading6"> Borda Recheada</h3>
+    </br>
+    <h3   style="color: rgb(255, 255, 255);" id="tamanho-heading6"> Borda Recheada ? </h3>
     <form class="list" id="tamanho-form9">
 
 	    <ion-radio ng-click="inserirBorda('Sim')">
@@ -115,7 +134,8 @@
 
     </form>
 
-    <h3  id="menu-heading1">Selecione a forma de pagamento: </h2>
+    </br>
+    <h3   style="color: rgb(255, 255, 255);" id="menu-heading1">Selecione a nova forma de pagamento </h2>
     <form class="list" id="tamanho-form9">
 
         <ion-radio ng-click="atualizarPagamento('Dinheiro')">
