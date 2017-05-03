@@ -22,7 +22,7 @@ var config = {
   user: 'postgres', 
   database: 'app-pizzaria', 
   password: '123456',
-  port: 5432,
+  port: 5433,
   max: 10, 
   idleTimeoutMillis: 30000, 
 };
@@ -485,12 +485,3 @@ app.put('/atualizarCliente', urlencodedParser, function(req, res) {
     });
 
 });
-
-
-
-
-
-
-
-
-
